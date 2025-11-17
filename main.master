@@ -1,0 +1,543 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="main.master.cs" Inherits="Water_Man_main" %>
+<!DOCTYPE html>
+<html lang="en">
+<head id="Head1" runat="server">
+    <title>
+        <asp:Literal ID="ltlPageTitle" runat="server" Text="Water Management System" />
+    </title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Desktop CSS: Only loads on screens wider than 600px -->
+    <link rel="stylesheet" href="css/win.css" media="screen and (min-width: 601px)">
+    <!-- Mobile CSS: Only loads on screens 600px wide or less -->
+    <link rel="stylesheet" href="css/mob.css" media="screen and (max-width: 600px)">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23009bff'><path d='M12 2C7 8 2 13 2 18c0 3.86 3.14 7 7 7s7-3.14 7-7c0-5-2-8-5-7zm0 19c-3.31 0-6-2.69-6-6 0-2.83 2.05-5.85 6-9.64 3.95 3.79 6 6.81 6 9.64 0 3.31-2.69 6-6 6z'/></svg>" />
+
+
+    <style>
+         .goog-te-banner-frame.skiptranslate {
+        display: none !important;
+    }
+
+    .goog-logo-link, .goog-te-gadget {
+        display: none !important;
+    }
+
+    #goog-gt-tt, .goog-te-balloon-frame {
+        display: none !important;
+    }
+
+    .goog-text-highlight {
+        background: none !important;
+        box-shadow: none !important;
+    }
+
+    iframe.goog-te-banner-frame {
+        display: none !important;
+    }
+
+    .skiptranslate {
+        display: none !important;
+    }
+        /* Preloader Styles - From Uiverse.io by Pradeepsaranbishnoi */
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;           
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+        }
+
+        .preloader.fade-out {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .preloader-content {
+            text-align: center;
+            color: black;
+        }
+
+        .loader {
+            --s: 5px;
+            /* control the size */
+            width: calc(10*var(--s));
+            display: grid;
+            aspect-ratio: 1;
+            border-radius: 50%;
+            -webkit-mask: radial-gradient(50% 50%,#0000 calc(99% - 2*var(--s)),#000 calc(101% - 2*var(--s)));
+            animation: r 4s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        .loader:before {
+            content: "";
+            /* adjust the colors below */
+            background: conic-gradient(from 25deg,#f8a201 25%,#fa2402 0 50%,#fdb3b0 0 75%,#02dde1 0);
+            -webkit-mask: repeating-conic-gradient(#0000 0 25deg,#000 23% 25%),
+                radial-gradient(var(--s) at var(--s) 50%,#000 97%,#0000) 
+                left/calc(100% - 2*var(--s)) 100% repeat-x,
+                radial-gradient(var(--s) at 50% var(--s),#000 97%,#0000) 
+                top /100% calc(100% - 2*var(--s)) repeat-y;
+        }
+
+        @keyframes r {
+            to {
+                transform: rotate(1turn)
+            }
+        }
+
+        .preloader-text {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .preloader-subtext {
+            font-size: 14px;
+            opacity: 0.8;
+            animation: fadeInOut 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        @keyframes fadeInOut {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 0.4; }
+        }
+
+        /* Hide main content while loading */
+        body.loading .desktop-app {
+            opacity: 0;
+            transition: opacity 0.3s ease-in;
+        }
+
+        body.loaded .desktop-app {
+            opacity: 1;
+        }
+
+        /* Remove underlines from all navigation links */
+        .sidebar ul li a,
+        .bottom-nav__item,
+        .bottom-nav__submenu-item {
+            text-decoration: none !important;
+        }
+        
+        .sidebar ul li a:hover,
+        .sidebar ul li a:focus,
+        .sidebar ul li a:visited {
+            text-decoration: none !important;
+        }
+        
+        /* Reset all sidebar items to default state */
+        .sidebar ul li {
+            background-color: transparent;
+            border-radius: 0;
+            margin-bottom: 2px;
+        }
+        
+        .sidebar ul li a {
+            display: block;
+            padding: 12px 15px;
+            color: #333;
+            transition: all 0.3s ease;
+            border-radius: 5px;
+        }
+        
+        /* Regular hover effect for non-active items */
+        .sidebar ul li:not(.active):not(.parent-active) a:hover {
+            background-color: #f0f0f0;
+            color: #007bff;
+        }
+        
+        /* Active state styling for direct page links */
+        .sidebar ul li.active {
+            background-color: #007bff;
+            border-radius: 5px;
+        }
+        
+        .sidebar ul li.active a {
+            background-color: #007bff;
+            color: white !important;
+            font-weight: bold;
+        }
+        
+        /* Parent menu styling when submenu is active */
+        .sidebar ul li.parent-active {
+            background-color: #e3f2fd;
+            border-radius: 5px;
+            border-left: 4px solid #007bff;
+        }
+        
+        .sidebar ul li.parent-active > span,
+        .sidebar ul li.parent-active > a {
+            background-color: #e3f2fd;
+            color: #007bff !important;
+            font-weight: bold;
+        }
+        
+        /* Submenu container styling */
+        .sidebar ul li .submenu {
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            margin-top: 5px;
+            padding: 5px 0;
+            border-left: 3px solid #007bff;
+        }
+        
+        /* Submenu items default state */
+        .sidebar ul li .submenu .submenu-item {
+            background-color: transparent;
+            margin: 1px 0;
+        }
+        
+        .sidebar ul li .submenu .submenu-item a {
+            padding: 8px 25px;
+            color: #666;
+            background-color: transparent;
+            border-radius: 3px;
+            margin: 0 5px;
+        }
+        
+        /* Submenu item hover effect */
+        .sidebar ul li .submenu .submenu-item:not(.active) a:hover {
+            background-color: #e9ecef;
+            color: #007bff;
+        }
+        
+        /* Active submenu item styling */
+        .sidebar ul li .submenu .submenu-item.active {
+            background-color: #007bff;
+            border-radius: 3px;
+            margin: 0 5px;
+        }
+        
+        .sidebar ul li .submenu .submenu-item.active a {
+            background-color: #007bff;
+            color: white !important;
+            font-weight: bold;
+        }
+        
+        /* Submenu visibility */
+        .sidebar ul li .submenu {
+            display: none;
+        }
+        
+        .sidebar ul li .submenu.visible {
+            display: block;
+        }
+        
+        /* Active state for mobile bottom navigation */
+        .bottom-nav__item.active {
+            background-color: #007bff;
+            color: white;
+        }
+        
+        .bottom-nav__item.active .bottom-nav__icon {
+            color: white;
+        }
+        
+        /* Parent menu text styling for has-submenu items */
+        .sidebar ul li.has-submenu {
+            cursor: pointer;
+        }
+        
+        .sidebar ul li.has-submenu > span {
+            display: block;
+            padding: 12px 15px;
+            color: #333;
+            transition: all 0.3s ease;
+            border-radius: 5px;
+        }
+
+        /* Remove underlines from logout links */
+        .logout-link,
+        .logout-icon-btn,
+        .logout-link:hover,
+        .logout-link:focus,
+        .logout-link:active,
+        .logout-icon-btn:hover,
+        .logout-icon-btn:focus,
+        .logout-icon-btn:active {
+            text-decoration: none !important;
+        }
+
+        /* Style the logout link to match navigation */
+        .logout-link {
+            display: block;
+            padding: 12px 15px;
+            color: #333;
+            transition: all 0.3s ease;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        .logout-link:hover {
+            background-color: #f0f0f0;
+            color: #007bff;
+        }
+
+        /* Style the mobile logout icon */
+        .logout-icon-btn {
+            background: none;
+            border: none;
+            color: inherit;
+            cursor: pointer;
+            padding: 0;
+        }
+    </style>
+
+    <asp:ContentPlaceHolder id="head" runat="server" />
+    
+</head>
+<body class="loading">
+    <!-- Preloader -->
+    <div id="preloader" class="preloader">
+        <div class="preloader-content">
+            <div class="loader"></div>
+            <div class="preloader-text">Water Management System</div>
+        </div>
+    </div>
+
+    <form id="form1" runat="server">
+
+        <div class="desktop-app">
+            <div class="container">
+                <!-- Sidebar (Desktop) -->
+                <aside class="sidebar">
+                    <div class="logo">
+                        <asp:Literal ID="ltlAdminPanel" runat="server" Text="Admin Panel" />
+                    </div>
+                    <ul>
+                        <li id="liDashboard" runat="server">
+                            <a href="Default.aspx">
+                                <asp:Literal ID="ltlDashboard" runat="server" Text="Dashboard" />
+                            </a>
+                        </li>
+                        <li id="liCustomerMaster" runat="server" class="has-submenu" onclick="toggleSubmenu('desktop-events-submenu')">
+                            <span><asp:Literal ID="ltlCustomerMaster" runat="server" Text="Customer Management" /></span>
+                            <ul class="submenu" id="desktop-events-submenu">
+                                <li id="liAddCustomer" runat="server" class="submenu-item">
+                                    <a href="Customer_add.aspx" style="color:black; font-weight:bold;">
+                                        <asp:Literal ID="ltlAddCustomer" runat="server" Text="Add Customer" />
+                                    </a>
+                                </li>
+                                <li id="liManageCustomer" runat="server" class="submenu-item">
+                                    <a href="Customer_master.aspx" style="color:black; font-weight:bold;">
+                                        <asp:Literal ID="ltlManageCustomer" runat="server" Text="Manage Customers" />
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li id="liAreaMaster" runat="server" class="has-submenu" onclick="toggleSubmenu('desktop-area-submenu')">
+                            <span><asp:Literal ID="ltlAreaWiseMaster" runat="server" Text="Area Wise Management" /></span>
+                            <ul class="submenu" id="desktop-area-submenu">
+                                <li id="liAddArea" runat="server" class="submenu-item">
+                                    <a href="Area_add.aspx" style="color:black; font-weight:bold;">
+                                        <asp:Literal ID="ltlAddArea" runat="server" Text="Add Area" />
+                                    </a>
+                                </li>
+                                <li id="liManageArea" runat="server" class="submenu-item">
+                                    <a href="Area_master.aspx" style="color:black; font-weight:bold;">
+                                        <asp:Literal ID="ltlManageArea" runat="server" Text="Manage Areas" />
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li id="liTransaction" runat="server">
+                            <a href="Transaction_Master.aspx">
+                                <asp:Literal ID="ltlTransactionMaster" runat="server" Text="Transaction Management" />
+                            </a>
+                        </li>
+                        <li id="liReports" runat="server">
+                            <a href="Reports.aspx">
+                                <asp:Literal ID="ltlReports" runat="server" Text="Reports" />
+                            </a>
+                        </li>
+
+                        <li id="liSettings" runat="server">
+                            <a href="Settings.aspx">
+                                <asp:Literal ID="ltlSettings" runat="server" Text="Settings" />
+                            </a>
+                        </li>
+                    </ul>
+                    <input id="lnkLogout" type="button" value="Logout" runat="server" onserverclick="lnkLogout_Click" class="logout logout-link" />                   
+                </aside>
+                <!-- Main Content -->
+                <main class="main-content">
+                    <!-- Desktop Header -->
+                    
+                    <!-- Mobile Topbar -->
+                    <div class="mobile-topbar">
+                        <span class="mobile-welcome">Welcome, <asp:Literal ID="ltlUserNameMob" runat="server" Text="Admin" />!</span>
+                        <a href="Settings.aspx"><span class="settings-icon"><i class="fas fa-cog"></i></span></a>
+                        <span class="logout-icon">
+                            <asp:LinkButton ID="lnkLogoutMob" runat="server" OnClick="lnkLogout_Click" CssClass="logout-icon-btn">
+                                <i class="fas fa-sign-out-alt"></i>
+                            </asp:LinkButton>
+                        </span>
+                    </div>
+                    
+                    <!-- Content Placeholder for each page -->
+                    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server" />
+                    <!-- Mobile Bottom Navigation -->
+                    <nav class="bottom-nav">
+                        <div id="navDashboard" runat="server" class="bottom-nav__item" onclick="location.href='Default.aspx'">
+                            <span class="bottom-nav__icon"><i class="fas fa-home"></i></span>
+                            <span>Dashboard</span>
+                        </div>
+                        <div id="navCustomers" runat="server" class="bottom-nav__item" onclick="toggleSubmenu('mobile-customer-submenu')">
+                            <span class="bottom-nav__icon"><i class="fas fa-users"></i></span>
+                            <span>Customers</span>
+                            <div class="bottom-nav__submenu" id="mobile-customer-submenu">
+                                <div class="bottom-nav__submenu-item" onclick="location.href='Customer_add.aspx'">Add Customer</div>
+                                <div class="bottom-nav__submenu-item" onclick="location.href='Customer_master.aspx'">Manage Customers</div>
+                            </div>
+                        </div>
+                        <div id="navAreas" runat="server" class="bottom-nav__item" onclick="toggleSubmenu('mobile-area-submenu')">
+                            <span class="bottom-nav__icon"><i class="fas fa-map-marker-alt"></i></span>
+                            <span>Areas</span>
+                            <div class="bottom-nav__submenu" id="mobile-area-submenu">
+                                <div class="bottom-nav__submenu-item" onclick="location.href='Area_add.aspx'">Add Area</div>
+                                <div class="bottom-nav__submenu-item" onclick="location.href='Area_master.aspx'">Manage Areas</div>
+                            </div>
+                        </div>
+                        <div id="navTransactions" runat="server" class="bottom-nav__item" onclick="location.href='Transaction_Master.aspx'">
+                            <span class="bottom-nav__icon"><i class="fas fa-exchange-alt"></i></span>
+                            <span>Transactions</span>
+                        </div>
+                        <div id="navReports" runat="server" class="bottom-nav__item" onclick="location.href='Reports.aspx'">
+                            <span class="bottom-nav__icon"><i class="fas fa-file-alt"></i></span>
+                            <span>Reports</span>
+                        </div>
+                    </nav>
+                </main>
+            </div>
+        </div>
+        <!-- Scripts -->
+        <script>
+            // Preloader functionality
+            window.addEventListener('load', function() {
+                // Minimum loading time of 1.5 seconds for better UX
+                setTimeout(function() {
+                    const preloader = document.getElementById('preloader');
+                    const body = document.body;
+                    
+                    // Add fade-out class to preloader
+                    preloader.classList.add('fade-out');
+                    
+                    // Remove loading class from body
+                    body.classList.remove('loading');
+                    body.classList.add('loaded');
+                    
+                    // Remove preloader from DOM after animation
+                    setTimeout(function() {
+                        preloader.style.display = 'none';
+                    }, 500);
+                }, 1500);
+            });
+
+            document.addEventListener("DOMContentLoaded", function () {
+                const cards = document.querySelectorAll('.scroll-animate-card');
+                if (cards.length > 0) {
+                    const observer = new IntersectionObserver(entries => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                entry.target.classList.add('scrolled-in');
+                    entry.target.classList.remove('scrolled-out');
+                } else {
+                    entry.target.classList.remove('scrolled-in');
+                    entry.target.classList.add('scrolled-out');
+                }
+            });
+            }, { threshold: 0.3 });
+            cards.forEach(card => observer.observe(card));
+            }
+            });
+
+            function toggleSubmenu(submenuId) {
+                const submenu = document.getElementById(submenuId);
+                if (submenu) submenu.classList.toggle('visible');
+            }
+        </script>
+    </form>
+<!-- Google Translate Element -->
+<div id="google_translate_element" style="display:none;"></div>
+
+<script type="text/javascript">
+    function setLanguageCookie(lang) {
+        document.cookie = "SiteLanguage=" + lang + "; path=/";
+    }
+
+    function getLanguageCookie() {
+        var nameEQ = "SiteLanguage=";
+        var ca = document.cookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+            var c = ca[i].trim();
+            if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length);
+        }
+        return null;
+    }
+
+    function changeGoogleLanguage(lang) {
+        if (lang === "en") {
+            // Clear translation back to original (English)
+            var frame = document.querySelector("iframe.goog-te-banner-frame");
+            if (frame) {
+                frame.contentWindow.document.querySelector("button").click();
+            }
+            return;
+        }
+
+        // Otherwise translate to selected language
+        var tryCount = 0;
+        var maxTries = 20;
+
+        var interval = setInterval(function () {
+            var combo = document.querySelector(".goog-te-combo");
+
+            if (combo) {
+                combo.value = '';
+                combo.dispatchEvent(new Event("change"));
+
+                setTimeout(function () {
+                    combo.value = lang;
+                    combo.dispatchEvent(new Event("change"));
+                }, 100);
+
+                clearInterval(interval);
+            }
+
+            tryCount++;
+            if (tryCount > maxTries) clearInterval(interval);
+        }, 500);
+    }
+</script>
+
+<script type="text/javascript">
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement({
+            pageLanguage: 'en',
+            includedLanguages: 'en,gu',
+            autoDisplay: false
+        }, 'google_translate_element');
+    }
+</script>
+
+<script type="text/javascript" 
+    src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
+</script>
+
+</body>
+</html>

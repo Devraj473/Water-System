@@ -1,0 +1,20 @@
+﻿body {
+    background-color: #1e1e1e;
+    color: #f0f0f0;
+    font-family: Arial, sans-serif;
+}
+
+.form-control-dark {
+    background-color: #333;
+    color: #fff;
+    border: 1px solid #666;
+    padding: 6px;
+}
+
+.btn-dark {
+    background-color: #444;
+    color: #fff;
+    border: 1px solid #888;
+    padding: 6px 12px;
+    cursor: pointer;
+}

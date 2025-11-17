@@ -1,0 +1,41 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36414.22
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "WaterSystem", ".", "{1D5F40C2-DC0E-4C97-B345-A7308E352EE7}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.8"
+		Debug.AspNetCompiler.VirtualPath = "/WaterSystem"
+		Debug.AspNetCompiler.PhysicalPath = "..\WaterSystem\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\WaterSystem\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/WaterSystem"
+		Release.AspNetCompiler.PhysicalPath = "..\WaterSystem\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\WaterSystem\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "19360"
+		SlnRelativePath = "..\WaterSystem\"
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1D5F40C2-DC0E-4C97-B345-A7308E352EE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D5F40C2-DC0E-4C97-B345-A7308E352EE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {692ABBC1-BB09-41D0-BB08-B9A76FF22720}
+	EndGlobalSection
+EndGlobal

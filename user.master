@@ -1,0 +1,499 @@
+<%@ Master Language="C#" AutoEventWireup="true" CodeFile="user.master.cs" Inherits="UserMaster" %>
+
+<!DOCTYPE html>
+<html>
+<head runat="server">
+    <title>Water System - Customer Portal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lato', Arial, sans-serif;
+            background: #f5f7fa;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #2196f3 0%, #1565c0 100%);
+            color: white;
+            padding: 0 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            font-size: 1.5em;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i {
+            font-size: 1.3em;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .user-name {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+        }
+
+        .btn-logout {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-logout:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Navigation */
+        .nav-container {
+            background: white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 70px;
+            z-index: 999;
+        }
+
+        .nav-menu {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            list-style: none;
+            padding: 0 20px;
+            overflow-x: auto;
+        }
+
+        .nav-menu li {
+            flex-shrink: 0;
+        }
+
+        .nav-menu a {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 18px 24px;
+            color: #333;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+        }
+
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            color: #2196f3;
+            border-bottom-color: #2196f3;
+            background: #f8f9fa;
+        }
+
+        .nav-menu i {
+            font-size: 1.1em;
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1400px;
+            margin: 30px auto;
+            padding: 0 20px;
+            min-height: calc(100vh - 250px);
+        }
+
+        /* Footer */
+        .footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px;
+        }
+
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5em;
+            cursor: pointer;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-wrap: wrap;
+            }
+
+            .user-name span {
+                display: none;
+            }
+
+            .nav-menu {
+                flex-direction: column;
+                display: none;
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .logo {
+                font-size: 1.2em;
+            }
+        }
+
+        /* Utility Classes */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+
+        .card-title {
+            font-size: 1.4em;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        /* ========================================
+           GLOBAL BUTTON STYLES - USER SIDE
+           ======================================== */
+
+        /* Base button styles for all buttons */
+        button:not(.menu-toggle):not(.btn-logout), 
+        input[type="button"], 
+        input[type="submit"], 
+        input[type="reset"],
+        .btn,
+        .button,
+        [id*="btn"]:not(#btnLogout),
+        a.btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.95em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            outline: none;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            font-family: 'Lato', Arial, sans-serif;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Primary Button - Blue (Default for most buttons) */
+        button:not(.menu-toggle):not(.btn-logout):not(.btn-secondary):not(.btn-danger):not(.btn-success):not(.btn-warning):not(.btn-info),
+        input[type="button"]:not(.btn-secondary):not(.btn-danger):not(.btn-success):not(.btn-warning):not(.btn-info),
+        input[type="submit"]:not(.btn-secondary):not(.btn-danger):not(.btn-success):not(.btn-warning):not(.btn-info),
+        .btn-primary,
+        [id*="btnEdit"]:not(#btnLogout),
+        [id*="btnSave"]:not(#btnLogout),
+        [id*="btnUpdate"]:not(#btnLogout),
+        [id*="btnAdd"]:not(#btnLogout),
+        [id*="btnFilter"]:not(#btnLogout),
+        [id*="btnSearch"]:not(#btnLogout),
+        [id*="btnRequest"]:not(#btnLogout),
+        [id*="btnSubmit"]:not(#btnLogout) {
+            background: linear-gradient(135deg, #2196f3 0%, #1976d2 100%);
+            color: white;
+        }
+
+        button:not(.menu-toggle):not(.btn-logout):not(.btn-secondary):not(.btn-danger):not(.btn-success):not(.btn-warning):not(.btn-info):hover,
+        input[type="button"]:not(.btn-secondary):not(.btn-danger):not(.btn-success):not(.btn-warning):not(.btn-info):hover,
+        input[type="submit"]:not(.btn-secondary):not(.btn-danger):not(.btn-success):not(.btn-warning):not(.btn-info):hover,
+        .btn-primary:hover,
+        [id*="btnEdit"]:not(#btnLogout):hover,
+        [id*="btnSave"]:not(#btnLogout):hover,
+        [id*="btnUpdate"]:not(#btnLogout):hover,
+        [id*="btnAdd"]:not(#btnLogout):hover,
+        [id*="btnFilter"]:not(#btnLogout):hover,
+        [id*="btnSearch"]:not(#btnLogout):hover,
+        [id*="btnRequest"]:not(#btnLogout):hover,
+        [id*="btnSubmit"]:not(#btnLogout):hover {
+            background: linear-gradient(135deg, #1976d2 0%, #1565c0 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(33, 150, 243, 0.4);
+        }
+
+        /* Secondary Button - Gray */
+        .btn-secondary,
+        [id*="btnCancel"]:not(#btnLogout),
+        [id*="btnClear"]:not(#btnLogout),
+        [id*="btnBack"]:not(#btnLogout),
+        [id*="btnClose"]:not(#btnLogout) {
+            background: linear-gradient(135deg, #757575 0%, #616161 100%);
+            color: white;
+        }
+
+        .btn-secondary:hover,
+        [id*="btnCancel"]:not(#btnLogout):hover,
+        [id*="btnClear"]:not(#btnLogout):hover,
+        [id*="btnBack"]:not(#btnLogout):hover,
+        [id*="btnClose"]:not(#btnLogout):hover {
+            background: linear-gradient(135deg, #616161 0%, #424242 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Danger Button - Red */
+        .btn-danger,
+        [id*="btnDelete"]:not(#btnLogout),
+        [id*="btnRemove"]:not(#btnLogout),
+        [id*="btnReject"]:not(#btnLogout) {
+            background: linear-gradient(135deg, #f44336 0%, #d32f2f 100%);
+            color: white;
+        }
+
+        .btn-danger:hover,
+        [id*="btnDelete"]:not(#btnLogout):hover,
+        [id*="btnRemove"]:not(#btnLogout):hover,
+        [id*="btnReject"]:not(#btnLogout):hover {
+            background: linear-gradient(135deg, #d32f2f 0%, #c62828 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(244, 67, 54, 0.4);
+        }
+
+        /* Success Button - Green */
+        .btn-success,
+        [id*="btnApprove"]:not(#btnLogout),
+        [id*="btnConfirm"]:not(#btnLogout) {
+            background: linear-gradient(135deg, #4caf50 0%, #388e3c 100%);
+            color: white;
+        }
+
+        .btn-success:hover,
+        [id*="btnApprove"]:not(#btnLogout):hover,
+        [id*="btnConfirm"]:not(#btnLogout):hover {
+            background: linear-gradient(135deg, #388e3c 0%, #2e7d32 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.4);
+        }
+
+        /* Warning Button - Orange */
+        .btn-warning {
+            background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%);
+            color: white;
+        }
+
+        .btn-warning:hover {
+            background: linear-gradient(135deg, #f57c00 0%, #ef6c00 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 152, 0, 0.4);
+        }
+
+        /* Info Button - Cyan */
+        .btn-info {
+            background: linear-gradient(135deg, #00bcd4 0%, #0097a7 100%);
+            color: white;
+        }
+
+        .btn-info:hover {
+            background: linear-gradient(135deg, #0097a7 0%, #00838f 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 188, 212, 0.4);
+        }
+
+        /* Active/Focus states */
+        button:not(.menu-toggle):not(.btn-logout):active,
+        input[type="button"]:active,
+        input[type="submit"]:active,
+        .btn:active {
+            transform: translateY(0);
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        button:not(.menu-toggle):not(.btn-logout):focus,
+        input[type="button"]:focus,
+        input[type="submit"]:focus,
+        .btn:focus {
+            outline: 2px solid rgba(33, 150, 243, 0.5);
+            outline-offset: 2px;
+        }
+
+        /* Disabled state */
+        button:disabled,
+        input[type="button"]:disabled,
+        input[type="submit"]:disabled,
+        .btn:disabled,
+        button[disabled],
+        input[disabled] {
+            background: #e0e0e0 !important;
+            color: #9e9e9e !important;
+            cursor: not-allowed !important;
+            transform: none !important;
+            box-shadow: none !important;
+            opacity: 0.6;
+        }
+
+        /* Small buttons */
+        .btn-sm,
+        button.btn-sm {
+            padding: 6px 12px;
+            font-size: 0.85em;
+        }
+
+        /* Large buttons */
+        .btn-lg,
+        button.btn-lg {
+            padding: 14px 28px;
+            font-size: 1.05em;
+        }
+
+        /* Button groups */
+        .button-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        /* Link buttons */
+        a.btn {
+            line-height: normal;
+            vertical-align: middle;
+        }
+
+        a.btn:hover {
+            text-decoration: none;
+        }
+
+        /* Mobile button adjustments */
+        @media (max-width: 768px) {
+            button:not(.menu-toggle):not(.btn-logout), 
+            input[type="button"], 
+            input[type="submit"],
+            .btn {
+                padding: 12px 24px;
+                font-size: 1em;
+            }
+
+            button:not(.menu-toggle):not(.btn-logout):active,
+            input[type="button"]:active,
+            input[type="submit"]:active,
+            .btn:active {
+                transform: scale(0.98);
+            }
+        }
+    </style>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-tint"></i>
+                    <span>Water System</span>
+                </div>
+                <button class="menu-toggle" onclick="toggleMenu(); return false;">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="user-info">
+                    <div class="user-name">
+                        <i class="fas fa-user-circle"></i>
+                        <span><%= Session["UserName"] != null ? Session["UserName"].ToString() : "Customer" %></span>
+                    </div>
+                    <asp:LinkButton ID="btnLogout" runat="server" CssClass="btn-logout" OnClick="btnLogout_Click">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </asp:LinkButton>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="nav-container">
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="UserDashboard.aspx"><i class="fas fa-home"></i> Dashboard</a></li>
+                <li><a href="UserOrders.aspx"><i class="fas fa-shopping-cart"></i> My Orders</a></li>
+                <li><a href="UserPayments.aspx"><i class="fas fa-credit-card"></i> Payment History</a></li>
+                <li><a href="UserProfile.aspx"><i class="fas fa-user"></i> Profile</a></li>
+                <li><a href="UserRequest.aspx"><i class="fas fa-plus-circle"></i> Request Product</a></li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>&copy; <%= DateTime.Now.Year %> Water System. All rights reserved.</p>
+        </div>
+    </form>
+
+    <script>
+        function toggleMenu() {
+            var menu = document.getElementById('navMenu');
+            menu.classList.toggle('active');
+        }
+
+        // Highlight active menu item
+        window.addEventListener('DOMContentLoaded', function() {
+            var currentPage = window.location.pathname.split('/').pop();
+            var menuLinks = document.querySelectorAll('.nav-menu a');
+            
+            menuLinks.forEach(function(link) {
+                if (link.getAttribute('href') === currentPage) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
