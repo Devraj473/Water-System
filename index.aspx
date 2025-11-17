@@ -103,6 +103,7 @@
             .portal-buttons {
                 flex-direction: column;
                 gap: 20px;
+/*                dfskn*/
             }
         }
     </style>
