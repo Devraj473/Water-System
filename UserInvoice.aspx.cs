@@ -82,8 +82,22 @@ public partial class UserInvoice : BaseUserPage
 
                 // Payment Status
                 string status = reader["Payment_Status"].ToString();
-                statusBadge.InnerText = status;
-                statusBadge.Attributes["class"] = "status-badge status-" + status.ToLower();
+                lblPaymentStatus.Text = status;
+                
+                // Set status CSS class
+                string statusClass = "status-" + status.ToLower();
+                if (statusClass == "status-paid")
+                    lblPaymentStatus.CssClass = "status-paid";
+                else if (statusClass == "status-pending")
+                    lblPaymentStatus.CssClass = "status-pending";
+                else
+                    lblPaymentStatus.CssClass = "status-unpaid";
+
+                // Additional fields for new design
+                lblSubtotal.Text = amount.ToString("N2");
+                lblItemStatus.Text = status;
+                lblSalesmanName.Text = "Assigned"; // You can modify this to get actual salesman name
+                lblGeneratedDate.Text = DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss");
             }
             else
             {

@@ -1,0 +1,38 @@
+# Ignore Visual Studio cache files
+.vs/
+*.user
+*.suo
+
+# Build results
+bin/
+obj/
+Debug/
+Release/
+[Bb]uild/
+[Ll]og/
+
+# IIS Express
+_IISExpress/
+IISExpress/
+*.dbmdl
+*.vscode/
+
+# NuGet packages
+packages/
+*.nupkg
+*.snupkg
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.log
+
+# Publish files
+wwwroot/
+app.publish/
+*.publish.xml
+
+# Rider / JetBrains
+.idea/
+*.DotSettings.u*
