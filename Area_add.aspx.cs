@@ -18,8 +18,7 @@ public partial class Water_Man_Default2 : BasePage
         {
             string areaName = txtAreaName.Text.Trim();
             string salesmanName = txtsalesmanName.Text.Trim();
-
-            // Server-side validation
+            
             if (string.IsNullOrEmpty(areaName))
             {
                 ShowErrorAlert("Area name is required.");
@@ -32,7 +31,6 @@ public partial class Water_Man_Default2 : BasePage
                 return;
             }
 
-            // Check if area name already exists
             using (SqlConnection con = new SqlConnection(connectionString))
             {
                 SqlCommand checkCmd = new SqlCommand("SELECT COUNT(*) FROM Tbl_Areas WHERE Area_Name = @AreaName AND IsActive = 1", con);

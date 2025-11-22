@@ -160,7 +160,6 @@
             document.body.appendChild(overlay);
             document.body.appendChild(alertBox);
             
-            // Store callback for later use
             window.alertCallback = callback;
         }
 
