@@ -218,7 +218,7 @@
             <asp:Button ID="btnSubmit" runat="server" Text="Submit Request" CssClass="btn-submit" OnClick="btnSubmit_Click" />
         </div>
 
-        <!-- My Requests -->
+        
         <div class="my-requests">
             <h2 class="section-title">My Recent Requests</h2>
             <asp:Repeater ID="rptRequests" runat="server">

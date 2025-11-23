@@ -1,0 +1,272 @@
+# Visual Studio files
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+build/
+bld/
+[Bb]in/
+[Oo]bj/
+
+# MSTest test Results
+[Tt]est[Rr]esult/
+[Bb]uild[Ll]og.*
+
+# NuGet
+*.nupkg
+packages/
+
+# ReSharper
+*.DotSettings.user
+
+# TeamCity
+_TeamCity*
+
+# DotCover
+*.dotCover
+
+# NCrunch
+*.ncrunch*
+.*crunch*.local.xml
+
+# MightyMoose
+*.mm.*
+AutoTest.Net/
+
+# Web workbench (sass)
+.sass-cache/
+
+# Installshield output folder
+[Ee]xpress/
+
+# DocProject is a documentation generator add-in
+DocProject/buildhelp/
+DocProject/Help/*.HxT
+DocProject/Help/*.2
+DocProject/Help/*.1
+DocProject/Help/*.HxC
+DocProject/Help/*.HxT
+DocProject/Help/*.HxC
+DocProject/Help/*.HxF
+DocProject/Help/*.HxF
+DocProject/Help/*.HxF
+DocProject/Help/*.HxF
+DocProject/Help/*.HxF
+DocProject/Help/*.HxF
+DocProject/Help/*.HxF
+DocProject/Help/*.HxF
+
+# Click-Once directory
+publish/
+
+# Publish Web Output
+*.[Pp]ublish.xml
+*.azurePubxml
+# TODO: Comment the next line if you want to checkin your web deploy settings
+# but pipeline connection settings as password are stored in this file.
+*.pubxml
+*.publishproj
+
+# Microsoft Azure Web App publish settings. Comment the next line if you want to checkin your Azure Web App publish settings, but sensitive information contained in these files may be revealed
+*.azurePubxml
+
+# Windows Azure BuildLog
+*.log
+
+# Windows Azure Emulator
+ecf/
+rcf/
+
+# Windows Phone app production
+*.xap
+
+# Windows Store app project
+AppPackages/
+*.appx
+
+# Others
+*~
+*.cache
+*.dll
+*.exe
+*.pdb
+*.rc
+*.resx
+*.svc
+*.log
+*.tlog
+*.tfstate
+*.user
+*.aps
+*.pgc
+*.pgp
+*.pgs
+*.pidb
+*.pgc
+*.pgp
+*.pgs
+*.vsp
+*.vsps
+*.vss
+*.vsss
+*.suo
+*.cache
+*.pidb
+*.user
+*.suo
+*.vsps
+*.vss
+*.vsss
+*.user
+*.scc
+
+# TFS 2012 Local Workspace
+$tf/
+
+# Guidance Automation Toolkit
+*.gpState
+
+# ReSharper is a .NET coding add-in
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.User
+
+# TeamCity is a build add-in
+_TeamCity*
+
+# DotCover is a Code Coverage Tool
+*.dotCover
+
+# NCrunch
+*.ncrunch*
+.*crunch*.local.xml
+
+# NuGet Packages
+*.nupkg
+packages/
+
+# Windows Build Project
+*.dbproj
+
+# Windows Azure Build Project
+*.ccproj
+*.cloudproj
+
+# Visual Studio build cache
+*.ilk
+*.meta
+*.pch
+*.pdb
+*.pgc
+*.pgp
+*.sbr
+*.obj
+*.tlb
+*.tli
+*.tlh
+*.tmp_proj
+*.vspscc
+*.vssscc
+.builds
+*.pidb
+*.log
+*.tlog
+*.vspscc
+*.vssscc
+
+# Guidance Automation Toolkit
+*.gpState
+
+# ReSharper is a .NET coding add-in
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.User
+
+# TeamCity is a build add-in
+_TeamCity*
+
+# DotCover is a Code Coverage Tool
+*.dotCover
+
+# NCrunch
+*.ncrunch*
+.*crunch*.local.xml
+
+# NuGet Packages
+*.nupkg
+packages/
+
+# Windows Build Project
+*.dbproj
+
+# Windows Azure Build Project
+*.ccproj
+*.cloudproj
+
+# Visual Studio build cache
+*.ilk
+*.meta
+*.pch
+*.pdb
+*.pgc
+*.pgp
+*.sbr
+*.obj
+*.tlb
+*.tli
+*.tlh
+*.tmp_proj
+*.vspscc
+*.vssscc
+.builds
+*.pidb
+*.log
+*.tlog
+*.vspscc
+*.vssscc
+
+# Office 365
+# https://github.com/OfficeDev/office-ui-fabric-core/blob/master/.gitignore
+
+# DNX
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# VS Code
+.vscode/
+
+# Rider
+.idea/
+
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Mono auto generated files
+mono_crash.*
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# Mac
+.DS_Store

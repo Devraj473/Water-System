@@ -41,7 +41,7 @@ public partial class UserRequest : BaseUserPage
 
         using (SqlConnection con = new SqlConnection(conStr))
         {
-            // Check if Tbl_ProductRequest table exists, if not we'll create it
+            
             string checkTableQuery = @"
                 IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Tbl_ProductRequest]') AND type in (N'U'))
                 BEGIN

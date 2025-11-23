@@ -1,38 +1,39 @@
-# Ignore Visual Studio cache files
+Visual Studio user-specific files
+
+.suo .user .userosscache .sln.docstates
+
+Visual Studio cache
+
 .vs/
-*.user
-*.suo
 
-# Build results
-bin/
-obj/
-Debug/
-Release/
-[Bb]uild/
-[Ll]og/
+Build folders
 
-# IIS Express
-_IISExpress/
-IISExpress/
-*.dbmdl
-*.vscode/
+bin/ obj/ Debug/ Release/
 
-# NuGet packages
-packages/
-*.nupkg
-*.snupkg
+NuGet packages
 
-# Temporary files
-*.tmp
-*.temp
-*.bak
+packages/ *.nupkg
+
+Publish output
+
+App_Data/ [Aa]pp_Packages/
+
+SQL / Backup files
+
+.mdf .ldf *.bak
+
+Logs
+
 *.log
 
-# Publish files
-wwwroot/
-app.publish/
-*.publish.xml
+IIS Express
 
-# Rider / JetBrains
-.idea/
-*.DotSettings.u*
+iisexpress/
+
+Resharper
+
+_ReSharper/ .DotSettings.user
+
+Others
+
+.cache .db
