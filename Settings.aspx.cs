@@ -97,7 +97,7 @@ public partial class Water_Man_Default2 : BasePage
             if (Session["User_Id"] == null)
             {
                 ShowErrorAlert("Session expired. Please login again.");
-                Response.Redirect("Login.aspx");
+                Response.Redirect("index.aspx");
                 return;
             }
 

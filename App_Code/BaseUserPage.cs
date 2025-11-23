@@ -67,8 +67,8 @@ public class BaseUserPage : Page
         }
         else
         {
-            // User is not authenticated, redirect to user login
-            Response.Redirect("~/UserLogin.aspx", false);
+            // User is not authenticated, redirect to unified login page
+            Response.Redirect("index.aspx", false);
             Context.ApplicationInstance.CompleteRequest();
         }
     }
@@ -85,7 +85,7 @@ public class BaseUserPage : Page
             Response.Cookies.Add(sessionCookie);
         }
 
-        Response.Redirect("~/UserLogin.aspx?timeout=true", false);
+        Response.Redirect("index.aspx?timeout=true", false);
         Context.ApplicationInstance.CompleteRequest();
     }
 
@@ -93,7 +93,7 @@ public class BaseUserPage : Page
     {
         string currentPage = System.IO.Path.GetFileName(Request.Url.AbsolutePath).ToLower();
         string[] publicPages = { 
-            "userlogin.aspx",
+            "index.aspx",
             "userregister.aspx",
             "forgotpassword.aspx"
         };

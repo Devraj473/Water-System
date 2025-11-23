@@ -119,7 +119,7 @@ public partial class Water_Man_main : MasterPage
     {
         if (Session["Authenticated"] == null)
         {
-            Response.Redirect("Login.aspx");
+            Response.Redirect("index.aspx");
         }
     }
 
@@ -136,7 +136,7 @@ public partial class Water_Man_main : MasterPage
                 {
                     Session.Clear();
                     Session.Abandon();
-                    Response.Redirect("Login.aspx?timeout=true");
+                    Response.Redirect("index.aspx?timeout=true");
                     return;
                 }
             }
@@ -157,6 +157,6 @@ public partial class Water_Man_main : MasterPage
             Response.Cookies.Add(authCookie);
         }
 
-        Response.Redirect("Login.aspx");
+        Response.Redirect("index.aspx");
     }
 }

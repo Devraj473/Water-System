@@ -83,8 +83,8 @@ public class BasePage : Page
         }
         else
         {
-            // User is not authenticated, redirect to login
-            Response.Redirect("Login.aspx", false);
+            // User is not authenticated, redirect to unified login page
+            Response.Redirect("index.aspx", false);
             Context.ApplicationInstance.CompleteRequest();
         }
     }
@@ -111,7 +111,7 @@ public class BasePage : Page
             Response.Cookies.Add(sessionCookie);
         }
 
-        Response.Redirect("Login.aspx?timeout=true", false);
+        Response.Redirect("index.aspx?timeout=true", false);
         Context.ApplicationInstance.CompleteRequest();
     }
 
@@ -138,7 +138,7 @@ public class BasePage : Page
     {
         string currentPage = System.IO.Path.GetFileName(Request.Url.AbsolutePath).ToLower();
         string[] publicPages = { 
-            "login.aspx", 
+            "index.aspx", 
             "default2.aspx", 
             "register.aspx", 
             "forgotpassword.aspx",
@@ -209,7 +209,7 @@ public class BasePage : Page
                                     window.location.reload();
                                 }} else {{
                                     // User chose to logout
-                                    window.location.href = 'Login.aspx';
+                                    window.location.href = 'index.aspx';
                                 }}
                             }}, warningTime);
                         }}
@@ -217,32 +217,13 @@ public class BasePage : Page
                         // Auto logout when session expires
                         setTimeout(function() {{
                             alert('Your session has expired. You will be redirected to the login page.');
-                            window.location.href = 'Login.aspx?timeout=true';
+                            window.location.href = 'index.aspx?timeout=true';
                         }}, timeoutTime);
                     }}
                     
                     // Start the timer
                     if (sessionTimeoutMinutes > 0) {{
                         startSessionTimer();
-                    }}
-                    
-                    // Function to extend session via AJAX (optional)
-                    function extendSessionAjax() {{
-                        var xhr = new XMLHttpRequest();
-                        xhr.open('POST', 'ExtendSession.ashx', true);
-                        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-                        xhr.onreadystatechange = function() {{
-                            if (xhr.readyState === 4) {{
-                                if (xhr.status === 200 && xhr.responseText === 'OK') {{
-                                    // Session extended successfully, restart timer
-                                    startSessionTimer();
-                                }} else {{
-                                    // Session extension failed, redirect to login
-                                    window.location.href = 'Login.aspx?timeout=true';
-                                }}
-                            }}
-                        }};
-                        xhr.send();
                     }}
                 ", remainingMinutes, warningMinutes);
 
@@ -284,7 +265,7 @@ public class BasePage : Page
     {
         if (Session["Authenticated"] == null)
         {
-            Response.Redirect("Login.aspx");
+            Response.Redirect("index.aspx");
         }
     }    
 }

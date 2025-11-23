@@ -9,7 +9,7 @@ public partial class UserMaster : System.Web.UI.MasterPage
         // Check if user is authenticated
         if (Session["UserAuthenticated"] == null || Session["UserCustomerId"] == null)
         {
-            Response.Redirect("UserLogin.aspx", false);
+            Response.Redirect("index.aspx", false);
             Context.ApplicationInstance.CompleteRequest();
         }
     }
@@ -28,8 +28,8 @@ public partial class UserMaster : System.Web.UI.MasterPage
             Response.Cookies.Add(sessionCookie);
         }
 
-        // Redirect to login
-        Response.Redirect("UserLogin.aspx", false);
+        // Redirect to unified login page
+        Response.Redirect("index.aspx", false);
         Context.ApplicationInstance.CompleteRequest();
     }
 }
