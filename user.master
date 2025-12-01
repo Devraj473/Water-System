@@ -459,7 +459,6 @@
             <ul class="nav-menu" id="navMenu">
                 <li><a href="UserDashboard.aspx"><i class="fas fa-home"></i> Dashboard</a></li>
                 <li><a href="UserOrders.aspx"><i class="fas fa-shopping-cart"></i> My Orders</a></li>
-                <li><a href="UserPayments.aspx"><i class="fas fa-credit-card"></i> Payment History</a></li>
                 <li><a href="UserProfile.aspx"><i class="fas fa-user"></i> Profile</a></li>
                 <li><a href="UserRequest.aspx"><i class="fas fa-plus-circle"></i> Request Product</a></li>
             </ul>

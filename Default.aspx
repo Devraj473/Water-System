@@ -50,14 +50,6 @@
                 <asp:Label ID="lblTotalCustomers" runat="server" style="font-size:18px; color:#000099;"/>
             </div>
         </div>
-        <div class="dashboard-card scroll-animate-card" onclick="location.href='event_manage.aspx'">
-            <div class="card-title ">
-                <asp:Label ID="lblEventManagementTitle" runat="server" style="font-size:22px; color:#000099;" Text="Event Management"  />
-            </div>
-            <div class="card-value ">
-                <asp:Label ID="lblTotalEvents" runat="server" style="font-size:18px; color:#000099;"/>
-            </div>
-        </div>
         <div class="dashboard-card scroll-animate-card " onclick="location.href='addproduct.aspx'">
             <div class="card-title ">
                 <asp:Label ID="lblProductManagementTitle" runat="server" style="font-size:22px; color:#000099;" Text="Product Management" />

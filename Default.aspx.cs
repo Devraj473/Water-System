@@ -25,7 +25,6 @@ public partial class Water_Man_Default : BasePage
             //lblWelcome.Text = "Welcome!";
             //lblOverview.Text = "Overview of your water system business.";
            lblTotalCustomersTitle.Text = "Total Customers";
-            lblEventManagementTitle.Text = "Event Management";
             lblProductManagementTitle.Text = "Product Management";
 
             BindSummaryCards();
@@ -43,9 +42,6 @@ public partial class Water_Man_Default : BasePage
 
             SqlCommand cmd1 = new SqlCommand("SELECT COUNT(*) FROM Tbl_Customer WHERE IsActive = 1", con);
             lblTotalCustomers.Text = cmd1.ExecuteScalar().ToString();
-
-            SqlCommand cmd2 = new SqlCommand("SELECT COUNT(*) FROM Tbl_Event WHERE IsActive = 1", con);
-            lblTotalEvents.Text = cmd2.ExecuteScalar().ToString();
 
             // Only count active products
             SqlCommand cmd3 = new SqlCommand("SELECT COUNT(*) FROM Tbl_Product WHERE IsActive = 1", con);
