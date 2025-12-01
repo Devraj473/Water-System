@@ -35,7 +35,6 @@ public partial class UserProfile : BaseUserPage
 
             if (reader.Read())
             {
-                txtCustomerId.Text = reader["Customer_Id"].ToString();
                 txtName.Text = reader["Name"].ToString();
                 txtMobile.Text = reader["Mobile"].ToString();
                 txtAddress.Text = reader["Address"] != DBNull.Value ? reader["Address"].ToString() : "";
