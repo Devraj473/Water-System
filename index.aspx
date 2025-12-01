@@ -16,7 +16,7 @@
 
         body {
             font-family: 'Lato', 'Segoe UI', Arial, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(120deg, #eaf6fb 0%, #c3e3eb 100%);
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -25,13 +25,17 @@
         }
 
         .login-container {
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            background: rgba(255, 255, 255, 0.13);
+            border-radius: 22px;
+            box-shadow: 0 8px 32px rgba(33, 150, 243, 0.12);
             overflow: hidden;
             max-width: 500px;
             width: 100%;
             animation: slideIn 0.5s ease-out;
+            backdrop-filter: blur(22px) saturate(180%);
+            -webkit-backdrop-filter: blur(22px) saturate(180%);
+            position: relative;
+            z-index: 1;
         }
 
         @keyframes slideIn {
@@ -46,7 +50,7 @@
         }
 
         .login-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #2196f3;
             padding: 40px 30px;
             text-align: center;
             color: white;
@@ -56,6 +60,7 @@
             font-size: 2.5em;
             margin-bottom: 10px;
             font-weight: 700;
+            letter-spacing: 1px;
         }
 
         .login-header p {
@@ -90,8 +95,8 @@
 
         .user-type-btn.active {
             background: white;
-            color: #667eea;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            color: #2196f3;
+            box-shadow: 0 2px 8px rgba(33, 150, 243, 0.15);
         }
 
         .form-group {
@@ -101,7 +106,7 @@
         .form-group label {
             display: block;
             margin-bottom: 8px;
-            color: #333;
+            color: #183153;
             font-weight: 600;
             font-size: 0.95em;
         }
@@ -111,38 +116,78 @@
         .form-group input[type="email"] {
             width: 100%;
             padding: 14px 16px;
-            border: 2px solid #e0e0e0;
+            border: 2px solid rgba(33, 150, 243, 0.06);
             border-radius: 12px;
             font-size: 1em;
             font-family: 'Lato', Arial, sans-serif;
             transition: all 0.3s ease;
-            background: #f8f9fa;
+            background: rgba(255, 255, 255, 0.8);
         }
 
         .form-group input:focus {
+            border-color: #2196f3;
             outline: none;
-            border-color: #667eea;
-            background: white;
-            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+            box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.1);
+        }
+
+        .password-input-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .password-field {
+            width: 100%;
+            padding-right: 45px !important;
+        }
+
+        .password-toggle-btn {
+            position: absolute;
+            right: 12px;
+            background: none;
+            border: none;
+            color: #2196f3;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .password-toggle-btn:hover {
+            background: rgba(33, 150, 243, 0.1);
+            color: #1976d2;
+        }
+
+        .password-toggle-btn:active {
+            transform: scale(0.95);
+        }
+
+        .password-toggle-btn i {
+            font-size: 14px;
         }
 
         .btn-login {
             width: 100%;
             padding: 16px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #2196f3;
             color: white;
             border: none;
-            border-radius: 12px;
+            border-radius: 14px;
             font-size: 1.1em;
             font-weight: 700;
             cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            transition: background 0.2s;
+            box-shadow: 0 2px 8px rgba(33, 150, 243, 0.15);
+            letter-spacing: 1px;
         }
 
         .btn-login:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+            background: #1976d2;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(33, 150, 243, 0.25);
         }
 
         .btn-login:active {
@@ -172,7 +217,7 @@
         .help-text {
             text-align: center;
             margin-top: 25px;
-            color: #666;
+            color: #6c8ca1;
             font-size: 0.9em;
         }
 
@@ -234,7 +279,12 @@
 
                     <div class="form-group">
                         <label for="txtPassword">Password</label>
-                        <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" placeholder="Enter your password"></asp:TextBox>
+                        <div class="password-input-container">
+                            <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" placeholder="Enter your password" CssClass="password-field"></asp:TextBox>
+                            <button type="button" class="password-toggle-btn" onclick="togglePassword()">
+                                <i class="fas fa-eye" id="passwordIcon"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
 
@@ -271,6 +321,21 @@
                 document.getElementById('<%= txtMobile.ClientID %>').required = false;
                 document.getElementById('<%= txtUsername.ClientID %>').required = true;
                 document.getElementById('<%= txtPassword.ClientID %>').required = true;
+            }
+        }
+
+        function togglePassword() {
+            const passwordField = document.getElementById('<%= txtPassword.ClientID %>');
+            const passwordIcon = document.getElementById('passwordIcon');
+            
+            if (passwordField.type === 'password') {
+                passwordField.type = 'text';
+                passwordIcon.classList.remove('fa-eye');
+                passwordIcon.classList.add('fa-eye-slash');
+            } else {
+                passwordField.type = 'password';
+                passwordIcon.classList.remove('fa-eye-slash');
+                passwordIcon.classList.add('fa-eye');
             }
         }
 
