@@ -52,9 +52,11 @@
             margin-bottom: 5px;
         }
 
-        .profile-email {
-            color: #666;
-            font-size: 1.1em;
+        .section-title {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: #2c3e50;
+            margin: 35px 0 15px;
         }
 
         .form-group {
@@ -160,9 +162,6 @@
                 <div class="profile-name">
                     <%= Session["UserName"] != null ? Session["UserName"].ToString() : "Customer" %>
                 </div>
-                <div class="profile-email">
-                    <%= Session["UserEmail"] != null ? Session["UserEmail"].ToString() : "" %>
-                </div>
             </div>
 
             <asp:Label ID="lblSuccess" runat="server" CssClass="alert alert-success" Visible="false"></asp:Label>
@@ -186,11 +185,6 @@
             </div>
 
             <div class="form-group">
-                <label>Email Address</label>
-                <asp:TextBox ID="txtEmail" runat="server" TextMode="Email" placeholder="Enter your email"></asp:TextBox>
-            </div>
-
-            <div class="form-group">
                 <label>Address</label>
                 <asp:TextBox ID="txtAddress" runat="server" TextMode="MultiLine" placeholder="Enter your complete address"></asp:TextBox>
             </div>
@@ -201,6 +195,25 @@
             </div>
 
             <asp:Button ID="btnUpdate" runat="server" Text="Update Profile" CssClass="btn-update" OnClick="btnUpdate_Click" />
+
+            <div class="section-title">Change Password</div>
+
+            <div class="form-group">
+                <label>Old Password</label>
+                <asp:TextBox ID="txtOldPassword" runat="server" TextMode="Password" placeholder="Enter your current password"></asp:TextBox>
+            </div>
+
+            <div class="form-group">
+                <label>New Password</label>
+                <asp:TextBox ID="txtNewPassword" runat="server" TextMode="Password" placeholder="Enter a new password"></asp:TextBox>
+            </div>
+
+            <div class="form-group">
+                <label>Confirm New Password</label>
+                <asp:TextBox ID="txtConfirmPassword" runat="server" TextMode="Password" placeholder="Re-enter the new password"></asp:TextBox>
+            </div>
+
+            <asp:Button ID="btnChangePassword" runat="server" Text="Update Password" CssClass="btn-update" OnClick="btnChangePassword_Click" />
         </div>
     </div>
 </asp:Content>
