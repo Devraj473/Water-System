@@ -260,13 +260,18 @@
                 <!-- Customer Login Fields -->
                 <div id="customerFields">
                     <div class="form-group">
-                        <label for="txtEmail">Email Address</label>
-                        <asp:TextBox ID="txtEmail" runat="server" TextMode="Email" placeholder="Enter your email"></asp:TextBox>
+                        <label for="txtMobile">Mobile Number</label>
+                        <asp:TextBox ID="txtMobile" runat="server" placeholder="Enter your 10-digit mobile number" MaxLength="10"></asp:TextBox>
                     </div>
 
                     <div class="form-group">
-                        <label for="txtMobile">Mobile Number</label>
-                        <asp:TextBox ID="txtMobile" runat="server" placeholder="Enter your 10-digit mobile number" MaxLength="10"></asp:TextBox>
+                        <label for="txtCustomerPassword">Password</label>
+                        <div class="password-input-container">
+                            <asp:TextBox ID="txtCustomerPassword" runat="server" TextMode="Password" placeholder="Enter your password" CssClass="password-field"></asp:TextBox>
+                            <button type="button" class="password-toggle-btn" onclick="togglePassword('<%= txtCustomerPassword.ClientID %>', 'customerPasswordIcon')">
+                                <i class="fas fa-eye" id="customerPasswordIcon"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
 
@@ -281,8 +286,8 @@
                         <label for="txtPassword">Password</label>
                         <div class="password-input-container">
                             <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" placeholder="Enter your password" CssClass="password-field"></asp:TextBox>
-                            <button type="button" class="password-toggle-btn" onclick="togglePassword()">
-                                <i class="fas fa-eye" id="passwordIcon"></i>
+                            <button type="button" class="password-toggle-btn" onclick="togglePassword('<%= txtPassword.ClientID %>', 'adminPasswordIcon')">
+                                <i class="fas fa-eye" id="adminPasswordIcon"></i>
                             </button>
                         </div>
                     </div>
@@ -309,25 +314,25 @@
                 buttons[0].classList.add('active');
                 document.getElementById('customerFields').style.display = 'block';
                 document.getElementById('adminFields').style.display = 'none';
-                document.getElementById('<%= txtEmail.ClientID %>').required = true;
                 document.getElementById('<%= txtMobile.ClientID %>').required = true;
+                document.getElementById('<%= txtCustomerPassword.ClientID %>').required = true;
                 document.getElementById('<%= txtUsername.ClientID %>').required = false;
                 document.getElementById('<%= txtPassword.ClientID %>').required = false;
             } else {
                 buttons[1].classList.add('active');
                 document.getElementById('customerFields').style.display = 'none';
                 document.getElementById('adminFields').style.display = 'block';
-                document.getElementById('<%= txtEmail.ClientID %>').required = false;
                 document.getElementById('<%= txtMobile.ClientID %>').required = false;
+                document.getElementById('<%= txtCustomerPassword.ClientID %>').required = false;
                 document.getElementById('<%= txtUsername.ClientID %>').required = true;
                 document.getElementById('<%= txtPassword.ClientID %>').required = true;
             }
         }
 
-        function togglePassword() {
-            const passwordField = document.getElementById('<%= txtPassword.ClientID %>');
-            const passwordIcon = document.getElementById('passwordIcon');
-            
+        function togglePassword(fieldId, iconId) {
+            const passwordField = document.getElementById(fieldId);
+            const passwordIcon = document.getElementById(iconId);
+
             if (passwordField.type === 'password') {
                 passwordField.type = 'text';
                 passwordIcon.classList.remove('fa-eye');

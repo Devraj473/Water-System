@@ -33,8 +33,8 @@ public partial class index : System.Web.UI.Page
         // Set default field requirements for customer login
         if (!IsPostBack)
         {
-            txtEmail.Attributes.Add("placeholder", "Enter your email");
             txtMobile.Attributes.Add("placeholder", "Enter your 10-digit mobile number");
+            txtCustomerPassword.Attributes.Add("placeholder", "Enter your password");
             txtUsername.Attributes.Add("placeholder", "Enter your username");
             txtPassword.Attributes.Add("placeholder", "Enter your password");
         }
@@ -56,21 +56,13 @@ public partial class index : System.Web.UI.Page
 
     private void CustomerLogin()
     {
-        string email = txtEmail.Text.Trim();
         string mobile = txtMobile.Text.Trim();
+        string password = txtCustomerPassword.Text.Trim();
 
         // Validation
-        if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(mobile))
+        if (string.IsNullOrEmpty(mobile) || string.IsNullOrEmpty(password))
         {
-            lblError.Text = "Please enter both email and mobile number.";
-            lblError.Visible = true;
-            return;
-        }
-
-        // Validate email format
-        if (!IsValidEmail(email))
-        {
-            lblError.Text = "Please enter a valid email address.";
+            lblError.Text = "Please enter both mobile number and password.";
             lblError.Visible = true;
             return;
         }
@@ -89,10 +81,11 @@ public partial class index : System.Web.UI.Page
             {
                 string query = @"SELECT Customer_Id, Name, Address, Mobile, Area_Id, IsActive 
                                 FROM Tbl_Customer 
-                                WHERE Mobile = @Mobile AND IsActive = 1";
+                                WHERE Mobile = @Mobile AND Password = @Password AND IsActive = 1";
 
                 SqlCommand cmd = new SqlCommand(query, con);
                 cmd.Parameters.AddWithValue("@Mobile", mobile);
+                cmd.Parameters.AddWithValue("@Password", password); // TODO: hash password in production
 
                 con.Open();
                 SqlDataReader reader = cmd.ExecuteReader();
@@ -107,7 +100,7 @@ public partial class index : System.Web.UI.Page
                     Session["UserCustomerId"] = reader["Customer_Id"];
                     Session["UserName"] = reader["Name"];
                     Session["UserMobile"] = reader["Mobile"];
-                    Session["UserEmail"] = email; // Store the email they entered
+                    Session["UserEmail"] = string.Empty;
                     Session["UserAddress"] = reader["Address"];
                     Session["UserAreaId"] = reader["Area_Id"];
                     Session["UserLoginTime"] = DateTime.Now;

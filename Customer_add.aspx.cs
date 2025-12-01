@@ -71,13 +71,17 @@ public partial class Water_Man_Default2 : BasePage
                 }
             }
 
+            // Generate a random 6-digit password
+            string generatedPassword = GenerateSixDigitPassword();
+
             // Insert new customer
             using (SqlConnection con = new SqlConnection(connectionString))
             {
-                SqlCommand cmd = new SqlCommand("INSERT INTO Tbl_Customer (Name, Address, Mobile, Date, Area_Id, IsActive) VALUES (@name, @address, @mobile, @joinDate, @areaId, 1)", con);
+                SqlCommand cmd = new SqlCommand("INSERT INTO Tbl_Customer (Name, Address, Mobile, Password, Date, Area_Id, IsActive) VALUES (@name, @address, @mobile, @password, @joinDate, @areaId, 1)", con);
                 cmd.Parameters.AddWithValue("@name", name);
                 cmd.Parameters.AddWithValue("@address", address);
                 cmd.Parameters.AddWithValue("@mobile", mobile);
+                cmd.Parameters.AddWithValue("@password", generatedPassword);
                 cmd.Parameters.AddWithValue("@joinDate", joinDate);
                 cmd.Parameters.AddWithValue("@areaId", areaId);
                 con.Open();
@@ -86,7 +90,7 @@ public partial class Water_Man_Default2 : BasePage
 
                 if (result > 0)
                 {
-                    ShowSuccessAlert("Customer added successfully!");
+                    ShowSuccessAlert(string.Format("Customer added successfully! Generated password: {0}", generatedPassword));
                     ClearForm();
                 }
                 else
@@ -113,6 +117,12 @@ public partial class Water_Man_Default2 : BasePage
         txtMobile.Text = "";
         txtJoinDate.Text = "";
         ddlArea.SelectedIndex = 0;
+    }
+
+    private string GenerateSixDigitPassword()
+    {
+        Random random = new Random();
+        return random.Next(100000, 999999).ToString();
     }
 
     private void ShowSuccessAlert(string message)
